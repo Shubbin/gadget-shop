@@ -1,0 +1,923 @@
+import {
+  Product, Category, Order, Customer, PaymentRecord, PromoCode, DeliveryZone,
+  StoreBankAccount, AnnouncementBanner, HierarchicalCategory, ServiceRequest
+} from '@/types';
+
+export const SEED_PRODUCTS: Product[] = [
+  {
+    id: 'stx-iphone-16-pro',
+    name: 'iPhone 16 Pro',
+    category: 'Smartphones',
+    price: 1250000,
+    costPrice: 1080000,
+    oldPrice: 1350000,
+    discountBadge: '8%',
+    rating: 4.8,
+    reviewCount: 120,
+    inStock: true,
+    stockQuantity: 4,
+    cosmeticGrade: 'Grade A (Pristine)',
+    batteryHealth: 94,
+    serialNumber: 'SN-IP16P-9921',
+    imei: '358941094827102',
+    isNew: true,
+    isFeatured: true,
+    image: '/images/products/iphone-16-pro-black.jpg',
+    images: [
+      '/images/products/iphone-16-pro-black.jpg',
+      '/images/products/iphone-16-pro-natural.jpg',
+      '/images/products/iphone-16-pro-white.jpg',
+      '/images/products/iphone-16-pro-desert.jpg',
+    ],
+    description: 'The iPhone 16 Pro features a Grade 5 titanium enclosure with a refined micro-blasted finish, thin display borders, and the groundbreaking A18 Pro silicon. Featuring a 48MP Fusion camera with second-generation quad-pixel sensor and 5x Telephoto optical zoom, it delivers studio-grade photography and 4K 120 fps Dolby Vision video capture.',
+    specs: [
+      { name: 'Display', value: '6.3-inch Super Retina XDR OLED with ProMotion 120Hz' },
+      { name: 'Processor', value: 'Apple A18 Pro chip with 6-core GPU' },
+      { name: 'Storage', value: '256GB NVMe High-Speed Flash' },
+      { name: 'Camera', value: '48MP Main + 48MP Ultra Wide + 12MP 5x Telephoto' },
+      { name: 'Battery', value: 'Up to 27 hours video playback with MagSafe Fast Charge' },
+      { name: 'Operating System', value: 'iOS 18 with USB 3 (up to 10Gb/s)' },
+      { name: 'Warranty', value: '1-Year Certified GadgetShop Hardware Warranty' },
+    ],
+    colors: [
+      { name: 'Space Black', hex: '#232325', image: '/images/products/iphone-16-pro-black.jpg' },
+      { name: 'Natural Titanium', hex: '#a8a6a1', image: '/images/products/iphone-16-pro-natural.jpg' },
+      { name: 'White Titanium', hex: '#f0f0ed', image: '/images/products/iphone-16-pro-white.jpg' },
+      { name: 'Desert Titanium', hex: '#c5b19d', image: '/images/products/iphone-16-pro-desert.jpg' },
+    ],
+  },
+  {
+    id: 'stx-macbook-air-m3',
+    name: 'MacBook Air M3',
+    category: 'Laptops',
+    price: 1350000,
+    costPrice: 1150000,
+    oldPrice: 1500000,
+    discountBadge: '10%',
+    rating: 4.9,
+    reviewCount: 89,
+    inStock: true,
+    stockQuantity: 3,
+    cosmeticGrade: 'Grade A (Pristine)',
+    batteryHealth: 98,
+    serialNumber: 'SN-MBA-M3-8812',
+    isFeatured: true,
+    image: '/images/products/macbook-air-m3.jpg',
+    images: [
+      '/images/products/macbook-air-m3.jpg',
+      '/images/products/macbook-air-m3-midnight.jpg',
+      '/images/products/macbook-air-m3-starlight.jpg',
+    ],
+    description: 'Precision engineered from 100% recycled aluminum, the 13.6-inch MacBook Air with M3 chip offers whisper-quiet fanless operation and up to 18 hours of real-world battery endurance. Features a Liquid Retina display with 500 nits brightness, MagSafe 3 charging port, dual Thunderbolt ports, and dual external display support.',
+    specs: [
+      { name: 'Processor', value: 'Apple M3 8-core CPU / 10-core GPU with Hardware Ray Tracing' },
+      { name: 'Unified Memory', value: '16GB High-Bandwidth Unified Memory' },
+      { name: 'Storage', value: '512GB PCIe NVMe SSD' },
+      { name: 'Display', value: '13.6-inch Liquid Retina with True Tone & P3 Wide Color' },
+      { name: 'Audio', value: 'Four-speaker sound system with Spatial Audio' },
+      { name: 'Battery', value: '52.6-watt-hour battery with 35W Dual USB-C Adapter' },
+      { name: 'Warranty', value: '1-Year Certified GadgetShop Hardware Warranty' },
+    ],
+    colors: [
+      { name: 'Space Gray', hex: '#53555b', image: '/images/products/macbook-air-m3.jpg' },
+      { name: 'Midnight', hex: '#1e2430', image: '/images/products/macbook-air-m3-midnight.jpg' },
+      { name: 'Starlight', hex: '#e3dcd1', image: '/images/products/macbook-air-m3-starlight.jpg' },
+    ],
+  },
+  {
+    id: 'stx-sony-wh1000xm5',
+    name: 'Sony WH-1000XM5',
+    category: 'Headphones & Earbuds',
+    price: 450000,
+    costPrice: 380000,
+    oldPrice: 490000,
+    discountBadge: '8%',
+    rating: 4.7,
+    reviewCount: 76,
+    inStock: true,
+    stockQuantity: 6,
+    cosmeticGrade: 'Brand New',
+    batteryHealth: 100,
+    isFeatured: true,
+    image: '/images/products/sony-wh1000xm5.jpg',
+    images: [
+      '/images/products/sony-wh1000xm5.jpg',
+      '/images/products/sony-wh1000xm5-silver.jpg',
+    ],
+    description: 'Equipped with dual Integrated Processor V1 and HD Noise Canceling Processor QN1 controlling eight microphones, the WH-1000XM5 provides unmatched active acoustic isolation. Features precision-engineered 30mm carbon fiber drivers, LDAC high-resolution wireless playback, and 30 hours of continuous runtime on a single charge.',
+    specs: [
+      { name: 'Noise Cancellation', value: 'Auto NC Optimizer with 8 Beamforming Microphones' },
+      { name: 'Driver Unit', value: '30mm Carbon Fiber Composite Dome' },
+      { name: 'Battery Life', value: 'Up to 30 hours (NC ON) / 40 hours (NC OFF)' },
+      { name: 'Quick Charge', value: '3 min charge yields 3 hours playback' },
+      { name: 'Connectivity', value: 'Bluetooth 5.2 Multipoint (2 devices simultaneously)' },
+      { name: 'Codec Support', value: 'LDAC, AAC, SBC, High-Res Audio Wireless' },
+    ],
+    colors: [
+      { name: 'Black', hex: '#111111', image: '/images/products/sony-wh1000xm5.jpg' },
+      { name: 'Silver Platinum', hex: '#d1d5db', image: '/images/products/sony-wh1000xm5-silver.jpg' },
+    ],
+  },
+  {
+    id: 'stx-galaxy-buds3-pro',
+    name: 'Samsung Galaxy Buds3',
+    category: 'Headphones & Earbuds',
+    price: 320000,
+    costPrice: 260000,
+    oldPrice: 350000,
+    discountBadge: '8%',
+    rating: 4.6,
+    reviewCount: 64,
+    inStock: true,
+    stockQuantity: 5,
+    cosmeticGrade: 'Brand New',
+    batteryHealth: 100,
+    isFeatured: true,
+    image: '/images/products/galaxy-buds3.jpg',
+    images: ['/images/products/galaxy-buds3.jpg'],
+    description: 'Ergonomically sculpted open-type wireless earbuds delivering studio-grade 24-bit 96kHz hi-fi audio. Features adaptive active noise cancellation, automatic ambient sound adjustment, pinch touch controls, and IP57 water and dust resistance for workout protection.',
+    specs: [
+      { name: 'Acoustic Driver', value: '11mm Dynamic Driver with Dual Amp' },
+      { name: 'Audio Resolution', value: '24-bit / 96kHz SSC (Samsung Seamless Codec)' },
+      { name: 'Microphones', value: '3 Mics + VPU (Voice Pickup Unit)' },
+      { name: 'Water Resistance', value: 'IP57 Water & Sweat Resistant' },
+      { name: 'Battery Runtime', value: 'Up to 30 hours total playback with charging cradle' },
+    ],
+    colors: [
+      { name: 'Silver Gray', hex: '#a3a3a3', image: '/images/products/galaxy-buds3.jpg' },
+      { name: 'White', hex: '#ffffff', image: '/images/products/galaxy-buds3.jpg' },
+    ],
+  },
+  {
+    id: 'stx-apple-watch-s10',
+    name: 'Apple Watch Series 10',
+    category: 'Smartwatches',
+    price: 620000,
+    costPrice: 530000,
+    oldPrice: 675000,
+    discountBadge: '8%',
+    rating: 4.8,
+    reviewCount: 62,
+    inStock: true,
+    stockQuantity: 3,
+    cosmeticGrade: 'Grade A (Pristine)',
+    batteryHealth: 96,
+    isNew: true,
+    isFeatured: true,
+    image: '/images/products/apple-watch-s10.jpg',
+    images: ['/images/products/apple-watch-s10.jpg'],
+    description: 'The thinnest Apple Watch ever made, featuring Apple’s largest wide-angle OLED display with up to 40% more screen brightness when viewed off-axis. Includes comprehensive health telemetry with ECG, Blood Oxygen, Sleep Apnea detection, and depth gauge up to 6 meters.',
+    specs: [
+      { name: 'Case Material', value: '46mm Jet Black Polished Aluminum' },
+      { name: 'Display', value: 'Always-On Retina Wide-Angle OLED with Ion-X Glass' },
+      { name: 'Sensors', value: 'Electrical Heart (ECG), Third-Gen Optical Heart, Depth Gauge' },
+      { name: 'Charging Speed', value: 'Fast Charge 0 to 80% in approximately 30 minutes' },
+      { name: 'Water Rating', value: '50 meters swimproof water resistance' },
+    ],
+    colors: [
+      { name: 'Jet Black', hex: '#0a0a0a', image: '/images/products/apple-watch-s10.jpg' },
+      { name: 'Rose Gold', hex: '#b76e79', image: '/images/products/apple-watch-s10.jpg' },
+      { name: 'Silver', hex: '#e5e5e5', image: '/images/products/apple-watch-s10.jpg' },
+    ],
+  },
+  {
+    id: 'stx-playstation-5',
+    name: 'PlayStation 5 Slim',
+    category: 'Gaming',
+    price: 850000,
+    costPrice: 730000,
+    oldPrice: 920000,
+    discountBadge: '7%',
+    rating: 4.9,
+    reviewCount: 110,
+    inStock: true,
+    stockQuantity: 2,
+    cosmeticGrade: 'Brand New',
+    isFeatured: true,
+    image: '/images/products/playstation-5.jpg',
+    images: ['/images/products/playstation-5.jpg'],
+    description: 'The slimmer PlayStation 5 console packs powerful next-generation gaming technology inside an elegant, compact chassis. Enjoy ultra-fast SSD load times, 4K ray-traced visuals up to 120 FPS, Tempest 3D AudioTech, and deep haptic immersion via the DualSense wireless controller.',
+    specs: [
+      { name: 'Processor', value: 'x86-64-AMD Ryzen Zen 2 (8 Cores / 16 Threads)' },
+      { name: 'Graphics Engine', value: 'AMD Radeon RDNA 2 with Ray Tracing Acceleration' },
+      { name: 'Internal Storage', value: '1TB Ultra-High Speed Custom NVMe SSD (5.5GB/s raw)' },
+      { name: 'Video Output', value: 'HDMI 2.1 supporting 4K 120Hz, 8K, and VRR' },
+      { name: 'In the Box', value: 'PS5 Console, DualSense Controller, HDMI Cable, Power Cord' },
+    ],
+    colors: [
+      { name: 'Glacier White', hex: '#f8f8f8', image: '/images/products/playstation-5.jpg' },
+    ],
+  },
+  {
+    id: 'stx-anker-power-bank',
+    name: 'Anker 737 Power Bank (PowerCore 24K)',
+    category: 'Power Banks',
+    price: 75000,
+    costPrice: 58000,
+    oldPrice: 85000,
+    discountBadge: '11%',
+    rating: 4.6,
+    reviewCount: 38,
+    inStock: true,
+    stockQuantity: 8,
+    cosmeticGrade: 'Brand New',
+    isFeatured: true,
+    image: '/images/products/anker-power-bank.jpg',
+    images: ['/images/products/anker-power-bank.jpg'],
+    description: 'Equipped with Power Delivery 3.1 and bi-directional fast charging technology, this 24,000mAh external battery delivers up to 140W ultra-powerful output to recharge high-power laptops, MacBooks, and smartphones at maximum speed. Includes an intelligent digital smart display showing real-time wattage and battery health.',
+    specs: [
+      { name: 'Battery Capacity', value: '24,000mAh / 86.4Wh (Airline Approved)' },
+      { name: 'Maximum Output', value: '140W Max Fast Charge via Single USB-C' },
+      { name: 'Port Configuration', value: '2x USB-C (140W PD 3.1) + 1x USB-A (18W QC)' },
+      { name: 'Digital Display', value: 'Real-time Input/Output Watts, Battery %, Recharging Time' },
+      { name: 'Safety Tech', value: 'ActiveShield 2.0 Temperature Monitoring' },
+    ],
+  },
+  {
+    id: 'stx-logitech-mx-master-3s',
+    name: 'Logitech MX Master 3S Performance Mouse',
+    category: 'Accessories',
+    price: 120000,
+    costPrice: 95000,
+    oldPrice: 135000,
+    discountBadge: '11%',
+    rating: 4.7,
+    reviewCount: 46,
+    inStock: true,
+    stockQuantity: 5,
+    cosmeticGrade: 'Brand New',
+    isFeatured: true,
+    image: '/images/products/logitech-mx-master-3s.jpg',
+    images: ['/images/products/logitech-mx-master-3s.jpg'],
+    description: 'An iconic masterclass in ergonomics and precision. Featuring Quiet Click switches that reduce click noise by 90%, an 8,000 DPI Darkfield optical sensor that tracks on virtually any surface including glass, and the electromagnetic MagSpeed wheel that scrolls 1,000 lines per second in complete silence.',
+    specs: [
+      { name: 'Sensor Precision', value: 'Darkfield High Precision 200–8000 DPI' },
+      { name: 'Scroll Wheel', value: 'MagSpeed Electromagnetic SmartShift Scroll' },
+      { name: 'Battery Life', value: 'Up to 70 days on full charge (USB-C Fast Charging)' },
+      { name: 'Connectivity', value: 'Bluetooth Low Energy & Logi Bolt USB Receiver' },
+      { name: 'Multi-Device Flow', value: 'Cross-computer control across 3 PC/Mac systems' },
+    ],
+    colors: [
+      { name: 'Graphite Black', hex: '#262626', image: '/images/products/logitech-mx-master-3s.jpg' },
+      { name: 'Pale Gray', hex: '#d4d4d4', image: '/images/products/logitech-mx-master-3s.jpg' },
+    ],
+  },
+  {
+    id: 'stx-samsung-galaxy-s25',
+    name: 'Samsung Galaxy S25 Ultra',
+    category: 'Smartphones',
+    price: 1450000,
+    costPrice: 1240000,
+    oldPrice: 1600000,
+    discountBadge: '9%',
+    rating: 4.9,
+    reviewCount: 42,
+    inStock: true,
+    stockQuantity: 3,
+    cosmeticGrade: 'Grade A (Pristine)',
+    batteryHealth: 96,
+    serialNumber: 'SN-GS25U-7721',
+    imei: '354928172635481',
+    isNew: true,
+    image: '/images/products/galaxy-s25.jpg',
+    images: ['/images/products/galaxy-s25.jpg'],
+    description: 'Engineered with a robust Grade 5 titanium frame and Corning Gorilla Armor glass that reduces reflections by 75%. Boasts a flagship 200MP Quad Telephoto optical camera system with 5x and 10x optical zoom quality, the Snapdragon 8 Gen 3 for Galaxy platform, and a seamless embedded S-Pen stylus.',
+    specs: [
+      { name: 'Display', value: '6.8-inch Dynamic AMOLED 2X QHD+ 120Hz (2,600 nits)' },
+      { name: 'Processor', value: 'Qualcomm Snapdragon 8 Gen 3 for Galaxy (4nm)' },
+      { name: 'Memory & Storage', value: '12GB LPDDR5X RAM / 512GB UFS 4.0 Storage' },
+      { name: 'Camera System', value: '200MP Main + 50MP 5x Periscope + 10MP 3x Tele + 12MP Ultra-Wide' },
+      { name: 'Battery & Charging', value: '5,000mAh with 45W Super Fast Charging 2.0' },
+      { name: 'Build Materials', value: 'Titanium Shield Frame with IP68 Water/Dust Resistance' },
+    ],
+    colors: [
+      { name: 'Titanium Black', hex: '#1c1c1e', image: '/images/products/galaxy-s25.jpg' },
+      { name: 'Titanium Gray', hex: '#6b6b70', image: '/images/products/galaxy-s25.jpg' },
+    ],
+  },
+  {
+    id: 'stx-dell-ultrasharp-27',
+    name: 'Dell UltraSharp 27 4K USB-C Hub Monitor',
+    category: 'Monitors',
+    price: 580000,
+    costPrice: 480000,
+    oldPrice: 620000,
+    discountBadge: '6%',
+    rating: 4.8,
+    reviewCount: 31,
+    inStock: true,
+    stockQuantity: 4,
+    cosmeticGrade: 'Brand New',
+    image: '/images/products/dell-monitor.jpg',
+    images: ['/images/products/dell-monitor.jpg'],
+    description: 'Elevate your creative workflow with this 27-inch 4K UHD monitor featuring revolutionary IPS Black panel technology delivering a 2,000:1 contrast ratio for deep inky blacks. Boasts 98% DCI-P3 color gamut, ComfortView Plus low blue light hardware, and a single-cable USB-C hub providing 90W power delivery, DisplayPort, and RJ45 Gigabit Ethernet.',
+    specs: [
+      { name: 'Panel & Resolution', value: '27-inch IPS Black Panel, 4K UHD 3840 x 2160 at 60Hz' },
+      { name: 'Color Accuracy', value: '98% DCI-P3, 100% sRGB, Delta E < 2 Factory Calibrated' },
+      { name: 'Contrast Ratio', value: '2000:1 High Static Contrast with VESA DisplayHDR 400' },
+      { name: 'Hub Connectivity', value: 'USB-C (90W PD), DisplayPort 1.4, HDMI 2.0, RJ45 Ethernet, 4x USB 3.2' },
+      { name: 'Stand Adjustability', value: 'Height Adjustable (150mm), Tilt, Swivel, and Pivot 90°' },
+    ],
+  },
+  {
+    id: 'stx-sony-alpha-7iv',
+    name: 'Sony Alpha 7 IV Full-Frame Camera',
+    category: 'Cameras',
+    price: 2100000,
+    costPrice: 1820000,
+    oldPrice: 2250000,
+    discountBadge: '7%',
+    rating: 4.9,
+    reviewCount: 28,
+    inStock: true,
+    stockQuantity: 2,
+    cosmeticGrade: 'Grade A (Pristine)',
+    batteryHealth: 97,
+    serialNumber: 'SN-A7M4-3382',
+    image: '/images/products/sony-camera.jpg',
+    images: ['/images/products/sony-camera.jpg'],
+    description: 'The ultimate hybrid imaging tool for professional photographers and cinematic videographers. Packs a 33MP full-frame back-illuminated Exmor R CMOS sensor driven by the flagship BIONZ XR processing engine. Capable of 4K 60p 10-bit 4:2:2 recording, 759-point phase-detection autofocus with Real-Time Eye AF for humans, animals, and birds.',
+    specs: [
+      { name: 'Image Sensor', value: '33.0 Megapixel Full-Frame 35mm Exmor R CMOS' },
+      { name: 'Processor', value: 'BIONZ XR Dual Processor with 8x Processing Power' },
+      { name: 'Video Capabilities', value: '4K 60p in Super 35, 4K 30p 7K oversampled, 10-bit 4:2:2 All-Intra' },
+      { name: 'Stabilization', value: '5-Axis In-Body Optical Image Stabilization (5.5 stops)' },
+      { name: 'Autofocus Points', value: '759 Phase-Detection Points covering 94% of frame' },
+      { name: 'Card Slots', value: 'Dual Slots: CFexpress Type A / SD UHS-II Compatible' },
+    ],
+  },
+  {
+    id: 'stx-mechanical-keyboard',
+    name: 'Keychron K2 Wireless Mechanical Keyboard',
+    category: 'Accessories',
+    price: 110000,
+    costPrice: 85000,
+    oldPrice: 125000,
+    discountBadge: '12%',
+    rating: 4.7,
+    reviewCount: 53,
+    inStock: true,
+    stockQuantity: 6,
+    cosmeticGrade: 'Brand New',
+    image: '/images/products/keychron-keyboard.jpg',
+    images: ['/images/products/keychron-keyboard.jpg'],
+    description: 'A compact 75% layout tactile mechanical keyboard designed for maximum productivity and comfortable typing. Connects seamlessly with up to 3 devices via Bluetooth 5.1 or USB-C wired connection. Features pre-lubed Gateron G Pro Brown tactile mechanical switches, per-key RGB backlighting, Mac/Windows layout toggle keys, and an extensive 4,000mAh battery.',
+    specs: [
+      { name: 'Layout', value: '75% Compact 84-Key Form Factor' },
+      { name: 'Switch Type', value: 'Gateron G Pro Mechanical Switches (Hot-Swappable)' },
+      { name: 'Connectivity', value: 'Bluetooth 5.1 (Up to 3 Devices) & Type-C Wired' },
+      { name: 'Battery', value: '4,000mAh Rechargeable (Up to 240 hours without backlight)' },
+      { name: 'Compatibility', value: 'macOS, Windows, iOS, and Android Dedicated Keycaps' },
+    ],
+    colors: [
+      { name: 'RGB Backlight Black', hex: '#1e1e1e', image: '/images/products/keychron-keyboard.jpg' },
+      { name: 'White Backlight Gray', hex: '#525252', image: '/images/products/keychron-keyboard.jpg' },
+    ],
+  },
+];
+
+export const SEED_CATEGORIES: Category[] = [
+  { name: 'Smartphones', icon: 'Smartphone', count: '12+ products', image: '/images/categories/smartphones.jpg' },
+  { name: 'Laptops', icon: 'Laptop', count: '8+ products', image: '/images/categories/laptops.jpg' },
+  { name: 'Headphones & Earbuds', icon: 'Headphones', count: '15+ products', image: '/images/categories/headphones.jpg' },
+  { name: 'Smartwatches', icon: 'Watch', count: '10+ products', image: '/images/categories/smartwatches.jpg' },
+  { name: 'Accessories', icon: 'Gamepad2', count: '20+ products', image: '/images/categories/accessories.jpg' }
+];
+
+export const SEED_CUSTOMER: Customer = {
+  id: 'cust_gadgetshop_001',
+  name: 'Muhammed Adegoke',
+  email: 'muhammed@example.com',
+  phone: '+234 801 234 5678',
+  address: {
+    fullName: 'Muhammed Adegoke',
+    phone: '+234 801 234 5678',
+    email: 'muhammed@example.com',
+    address: '12, Freedom Street, Ikeja',
+    city: 'Ikeja',
+    state: 'Lagos',
+    postalCode: '100001'
+  },
+  walletBalance: 0,
+  savedAddresses: [
+    {
+      fullName: 'Muhammed Adegoke',
+      phone: '+234 801 234 5678',
+      email: 'muhammed@example.com',
+      address: '12, Freedom Street, Ikeja',
+      city: 'Ikeja',
+      state: 'Lagos',
+      postalCode: '100001'
+    }
+  ],
+  createdAt: '2026-04-01T10:00:00Z'
+};
+
+export const SEED_ORDERS: Order[] = [
+  {
+    id: 'GS-7842',
+    date: 'Apr 25, 2026',
+    items: [
+      { product: SEED_PRODUCTS[0], quantity: 1, selectedColor: 'Space Black' },
+      { product: SEED_PRODUCTS[3], quantity: 1, selectedColor: 'White' },
+      { product: SEED_PRODUCTS[1], quantity: 1, selectedColor: 'Space Gray' },
+      { product: SEED_PRODUCTS[6], quantity: 1, selectedColor: 'Black' }
+    ],
+    subtotal: 2995000,
+    deliveryFee: 2000,
+    discount: 0,
+    total: 2997000,
+    status: 'Out for Delivery',
+    paymentMethod: 'card',
+    delivery: {
+      deliveryId: 'DEL-88392',
+      provider: 'Gadget Shop Express Logistics',
+      status: 'OUT_FOR_DELIVERY',
+      trackingNumber: 'TRK-90428402',
+      address: {
+        fullName: 'Muhammed Adegoke',
+        phone: '+234 801 234 5678',
+        email: 'muhammed@example.com',
+        address: '12, Freedom Street, Ikeja',
+        city: 'Ikeja',
+        state: 'Lagos',
+        postalCode: '100001'
+      },
+      estimatedDelivery: '24 September 2026',
+      events: [
+        {
+          title: 'Order Confirmed',
+          description: 'Payment verified & order created successfully',
+          timestamp: 'Apr 25, 10:24 AM',
+          completed: true
+        },
+        {
+          title: 'Processing',
+          description: 'Package prepared & verified at Lagos hub',
+          timestamp: 'Apr 25, 2:15 PM',
+          completed: true
+        },
+        {
+          title: 'Out for Delivery',
+          description: 'Courier rider assigned and currently en route to delivery address',
+          timestamp: 'Apr 26, 9:00 AM',
+          completed: true
+        },
+        {
+          title: 'Delivered',
+          description: 'Package handed over to recipient',
+          timestamp: 'Pending',
+          completed: false
+        }
+      ]
+    }
+  },
+  {
+    id: 'GS-7721',
+    date: 'Apr 18, 2026',
+    items: [{ product: SEED_PRODUCTS[0], quantity: 1 }],
+    subtotal: 1250000,
+    deliveryFee: 0,
+    discount: 0,
+    total: 1250000,
+    status: 'Delivered',
+    paymentMethod: 'card',
+    delivery: {
+      deliveryId: 'DEL-77210',
+      provider: 'Gadget Shop Logistics',
+      status: 'DELIVERED',
+      trackingNumber: 'TRK-1192830',
+      address: {
+        fullName: 'Muhammed Adegoke',
+        phone: '+234 801 234 5678',
+        email: 'muhammed@example.com',
+        address: '12, Freedom Street, Ikeja',
+        city: 'Ikeja',
+        state: 'Lagos'
+      },
+      estimatedDelivery: 'Apr 20, 2026',
+      events: [
+        { title: 'Order Confirmed', description: 'Order confirmed', timestamp: 'Apr 18', completed: true },
+        { title: 'Delivered', description: 'Delivered', timestamp: 'Apr 20', completed: true }
+      ]
+    }
+  }
+];
+
+export const SEED_CUSTOMERS: Customer[] = [
+  {
+    id: 'CUST-001',
+    name: 'Muhammed Adegoke',
+    email: 'muhammed@example.com',
+    phone: '+234 801 234 5678',
+    walletBalance: 45000,
+    totalSpent: 2600000,
+    ordersCount: 3,
+    createdAt: '2026-01-15',
+    address: {
+      fullName: 'Muhammed Adegoke',
+      phone: '+234 801 234 5678',
+      email: 'muhammed@example.com',
+      address: '12, Freedom Street, Ikeja',
+      city: 'Ikeja',
+      state: 'Lagos',
+      postalCode: '100001'
+    },
+    savedAddresses: [
+      {
+        fullName: 'Muhammed Adegoke',
+        phone: '+234 801 234 5678',
+        email: 'muhammed@example.com',
+        address: '12, Freedom Street, Ikeja',
+        city: 'Ikeja',
+        state: 'Lagos',
+        postalCode: '100001'
+      }
+    ]
+  },
+  {
+    id: 'CUST-002',
+    name: 'Chinedu Okafor',
+    email: 'chinedu.okafor@gmail.com',
+    phone: '+234 802 345 6789',
+    walletBalance: 12500,
+    totalSpent: 1850000,
+    ordersCount: 2,
+    createdAt: '2026-03-02',
+    address: {
+      fullName: 'Chinedu Okafor',
+      phone: '+234 802 345 6789',
+      email: 'chinedu.okafor@gmail.com',
+      address: 'Plot 4, Admiralty Way, Lekki Phase 1',
+      city: 'Lekki',
+      state: 'Lagos',
+      postalCode: '105102'
+    },
+    savedAddresses: []
+  },
+  {
+    id: 'CUST-003',
+    name: 'Amina Yusuf',
+    email: 'amina.yusuf@yahoo.com',
+    phone: '+234 813 987 6543',
+    walletBalance: 80000,
+    totalSpent: 920000,
+    ordersCount: 1,
+    createdAt: '2026-05-18',
+    address: {
+      fullName: 'Amina Yusuf',
+      phone: '+234 813 987 6543',
+      email: 'amina.yusuf@yahoo.com',
+      address: 'Suite 12, Wuse 2 Commercial Plaza',
+      city: 'Abuja',
+      state: 'FCT',
+      postalCode: '900288'
+    },
+    savedAddresses: []
+  },
+  {
+    id: 'CUST-004',
+    name: 'Tunde Bakare',
+    email: 'tbakare@outlook.com',
+    phone: '+234 809 112 2334',
+    walletBalance: 0,
+    totalSpent: 420000,
+    ordersCount: 1,
+    createdAt: '2026-07-29',
+    address: {
+      fullName: 'Tunde Bakare',
+      phone: '+234 809 112 2334',
+      email: 'tbakare@outlook.com',
+      address: '5 Ring Road, Challenge',
+      city: 'Ibadan',
+      state: 'Oyo',
+      postalCode: '200255'
+    },
+    savedAddresses: []
+  }
+];
+
+export const SEED_PAYMENTS: PaymentRecord[] = [
+  {
+    id: 'PAY-10892',
+    transactionRef: 'TRX_PSTK_992819024',
+    orderId: 'GS-7842',
+    customerName: 'Muhammed Adegoke',
+    customerEmail: 'muhammed@example.com',
+    customerPhone: '+234 801 234 5678',
+    amount: 2997000,
+    fee: 44955, // 1.5% gateway fee
+    net: 2952045,
+    method: 'card',
+    channel: 'Paystack / Card',
+    status: 'successful',
+    date: '2026-09-20',
+    time: '14:22:10',
+    notes: 'Approved via Paystack Gateway, 3D-Secure verified',
+    verifiedBy: 'Automated Gateway Webhook',
+    verifiedAt: '2026-09-20 14:22:15'
+  },
+  {
+    id: 'PAY-10893',
+    transactionRef: 'TRX_BNK_481029481',
+    orderId: 'GS-8910',
+    customerName: 'Chinedu Okafor',
+    customerEmail: 'chinedu.okafor@gmail.com',
+    customerPhone: '+234 802 345 6789',
+    amount: 1350000,
+    fee: 0,
+    net: 1350000,
+    method: 'transfer',
+    channel: 'Direct Bank Transfer',
+    status: 'pending_verification',
+    date: '2026-09-21',
+    time: '09:15:30',
+    proofReceiptUrl: '/images/receipts/transfer_sample.png',
+    transferDetails: {
+      senderBank: 'Guaranty Trust Bank (GTBank)',
+      senderAccountName: 'Chinedu E. Okafor',
+      receivingBank: 'Access Bank PLC (GadgetShop HQ)'
+    },
+    notes: 'Customer uploaded transfer receipt for MacBook Air M3. Awaiting account credit confirmation.'
+  },
+  {
+    id: 'PAY-10894',
+    transactionRef: 'TRX_PSTK_772019482',
+    orderId: 'GS-7721',
+    customerName: 'Amina Yusuf',
+    customerEmail: 'amina.yusuf@yahoo.com',
+    customerPhone: '+234 813 987 6543',
+    amount: 1250000,
+    fee: 18750,
+    net: 1231250,
+    method: 'card',
+    channel: 'Paystack / Card',
+    status: 'successful',
+    date: '2026-09-18',
+    time: '11:04:12',
+    verifiedBy: 'Automated Gateway Webhook',
+    verifiedAt: '2026-09-18 11:04:18'
+  },
+  {
+    id: 'PAY-10895',
+    transactionRef: 'TRX_POS_661029381',
+    orderId: 'GS-6102',
+    customerName: 'Tunde Bakare',
+    customerEmail: 'tbakare@outlook.com',
+    customerPhone: '+234 809 112 2334',
+    amount: 380000,
+    fee: 2850,
+    net: 377150,
+    method: 'pos_on_delivery',
+    channel: 'POS on Delivery',
+    status: 'successful',
+    date: '2026-09-15',
+    time: '16:45:00',
+    verifiedBy: 'Dispatch Courier Rider #04',
+    verifiedAt: '2026-09-15 17:10:00',
+    notes: 'Settled via Moniepoint POS Terminal #GS-04'
+  },
+  {
+    id: 'PAY-10896',
+    transactionRef: 'TRX_REF_551029382',
+    orderId: 'GS-5012',
+    customerName: 'Emeka Nwosu',
+    customerEmail: 'emeka.nwosu@gmail.com',
+    customerPhone: '+234 805 111 2233',
+    amount: 95000,
+    fee: 0,
+    net: -95000,
+    method: 'card',
+    channel: 'Paystack / Card',
+    status: 'refunded',
+    date: '2026-09-12',
+    time: '10:30:20',
+    notes: 'Refund issued for cancelled order before dispatch. Credited to original card.'
+  }
+];
+
+export const SEED_PROMOS: PromoCode[] = [
+  {
+    id: 'PRM-001',
+    code: 'GADGET10',
+    discountType: 'percentage',
+    value: 10,
+    minOrderAmount: 200000,
+    usesCount: 48,
+    maxUses: 200,
+    active: true,
+    expiresAt: '2026-12-31',
+    description: '10% discount on smartphone and laptop purchases over ₦200,000'
+  },
+  {
+    id: 'PRM-002',
+    code: 'SWAPBONUS',
+    discountType: 'fixed',
+    value: 50000,
+    minOrderAmount: 500000,
+    usesCount: 19,
+    maxUses: 100,
+    active: true,
+    expiresAt: '2026-10-31',
+    description: '₦50,000 flat voucher for trade-in device upgrades'
+  },
+  {
+    id: 'PRM-003',
+    code: 'FREESHIP',
+    discountType: 'fixed',
+    value: 4500,
+    minOrderAmount: 150000,
+    usesCount: 82,
+    maxUses: 500,
+    active: true,
+    expiresAt: '2026-11-15',
+    description: 'Free doorstep express shipping across Lagos'
+  }
+];
+
+export const SEED_DELIVERY_ZONES: DeliveryZone[] = [
+  {
+    id: 'ZONE-01',
+    region: 'Lagos Mainland',
+    state: 'Lagos',
+    fee: 2500,
+    estimatedDays: 'Same-Day / Next-Day',
+    active: true
+  },
+  {
+    id: 'ZONE-02',
+    region: 'Lagos Island / Lekki / Ajah',
+    state: 'Lagos',
+    fee: 3500,
+    estimatedDays: 'Same-Day / Next-Day',
+    active: true
+  },
+  {
+    id: 'ZONE-03',
+    region: 'Abuja Municipal / Central',
+    state: 'FCT Abuja',
+    fee: 6500,
+    estimatedDays: '2 - 3 Business Days',
+    active: true
+  },
+  {
+    id: 'ZONE-04',
+    region: 'Port Harcourt / Rivers',
+    state: 'Rivers',
+    fee: 7500,
+    estimatedDays: '2 - 4 Business Days',
+    active: true
+  },
+  {
+    id: 'ZONE-05',
+    region: 'Nationwide Interstate (Other States)',
+    state: 'All States',
+    fee: 8500,
+    estimatedDays: '3 - 5 Business Days',
+    active: true
+  }
+];
+
+export const SEED_BANK_ACCOUNTS: StoreBankAccount[] = [
+  {
+    id: 'ACC-01',
+    bankName: 'Guaranty Trust Bank (GTBank)',
+    accountName: 'GadgetShop Technologies Ltd',
+    accountNumber: '0129482019',
+    active: true
+  },
+  {
+    id: 'ACC-02',
+    bankName: 'Access Bank PLC',
+    accountName: 'GadgetShop Operations',
+    accountNumber: '1482910394',
+    active: true
+  },
+  {
+    id: 'ACC-03',
+    bankName: 'Moniepoint Microfinance Bank',
+    accountName: 'GadgetShop Collections Hub',
+    accountNumber: '5591029481',
+    active: true
+  }
+];
+
+export const SEED_ANNOUNCEMENT: AnnouncementBanner = {
+  enabled: true,
+  message: '🔥 Flash Deals: Up to 15% OFF Apple & Samsung Gadgets + Free Delivery within Lagos this week!',
+  linkText: 'Shop Deals',
+  linkUrl: '/products?deals=true',
+  bgColor: '#7c3aed'
+};
+
+export const INITIAL_CATEGORIES: HierarchicalCategory[] = [
+  {
+    id: 'cat-apple',
+    name: 'Apple Devices',
+    icon: 'Smartphone',
+    image: '/images/categories/smartphones.jpg',
+    subCategories: ['iPhones', 'MacBooks', 'iPads', 'Apple Watch', 'AirPods'],
+  },
+  {
+    id: 'cat-samsung-android',
+    name: 'Samsung & Android',
+    icon: 'Smartphone',
+    image: '/images/categories/smartphones.jpg',
+    subCategories: ['Galaxy S Series', 'Galaxy Z Fold & Flip', 'Galaxy A Series', 'Google Pixel'],
+  },
+  {
+    id: 'cat-laptops',
+    name: 'Laptops & Computers',
+    icon: 'Laptop',
+    image: '/images/categories/laptops.jpg',
+    subCategories: ['MacBooks', 'Gaming Laptops', 'Dell', 'HP', 'Lenovo ThinkPad', 'Monitors'],
+  },
+  {
+    id: 'cat-gaming',
+    name: 'Gaming & Consoles',
+    icon: 'Gamepad2',
+    image: '/images/categories/accessories.jpg',
+    subCategories: ['PlayStation 5', 'Xbox Series X', 'Nintendo Switch', 'Controllers & VR'],
+  },
+  {
+    id: 'cat-audio-wearables',
+    name: 'Audio & Wearables',
+    icon: 'Headphones',
+    image: '/images/categories/headphones.jpg',
+    subCategories: ['Noise-Canceling Headphones', 'Wireless Earbuds', 'Smartwatches', 'Portable Speakers'],
+  },
+];
+
+export const INITIAL_SERVICES: ServiceRequest[] = [
+  {
+    id: 'SRV-8941',
+    type: 'repair',
+    customerName: 'Chinedu Okafor',
+    customerPhone: '+234 802 345 6789',
+    customerEmail: 'chinedu.okafor@gmail.com',
+    deviceCategory: 'Smartphones',
+    deviceModel: 'iPhone 13 Pro Max',
+    deviceCondition: 'Cracked OLED Screen, touch unresponsive',
+    issueDescription: 'Dropped on concrete, glass shattered and green horizontal lines on display.',
+    estimatedQuote: 85000,
+    status: 'in_progress',
+    stage: 'bench_work',
+    technicianAssigned: 'Engr. Daniel (Lead Tech)',
+    diagnosticChecks: {
+      screenWorking: false,
+      touchResponsive: false,
+      batteryHealth: 88,
+      faceIdOrFingerprint: true,
+      camerasWorking: true,
+      housingCondition: 'Grade B (Minor edge scuffs)',
+    },
+    createdAt: '2026-09-20 14:30',
+    serviceMethod: 'doorstep',
+    notes: 'Customer approved quote. Genuine Super Retina OLED panel installation ongoing.',
+  },
+  {
+    id: 'SRV-8942',
+    type: 'swap',
+    customerName: 'Amina Yusuf',
+    customerPhone: '+234 813 987 6543',
+    customerEmail: 'amina.yusuf@yahoo.com',
+    deviceCategory: 'Smartphones',
+    deviceModel: 'Samsung Galaxy S22 Ultra 256GB (London Used)',
+    deviceCondition: 'Like New (9.5/10), battery health 92%',
+    desiredGadget: 'iPhone 16 Pro 256GB Space Black',
+    estimatedQuote: 420000,
+    status: 'quoted',
+    stage: 'diagnostic',
+    technicianAssigned: 'Tech Kelvin (Trade-in Assessor)',
+    diagnosticChecks: {
+      screenWorking: true,
+      touchResponsive: true,
+      batteryHealth: 92,
+      faceIdOrFingerprint: true,
+      camerasWorking: true,
+      housingCondition: 'Grade A (Flawless)',
+    },
+    createdAt: '2026-09-20 16:15',
+    serviceMethod: 'walkin',
+    notes: 'Valuation offer generated: ₦420,000 credit. Customer balance to pay for iPhone 16 Pro: ₦830,000.',
+  },
+  {
+    id: 'SRV-8943',
+    type: 'repair',
+    customerName: 'Tunde Bakare',
+    customerPhone: '+234 809 112 2334',
+    customerEmail: 'tbakare@outlook.com',
+    deviceCategory: 'Laptops',
+    deviceModel: 'MacBook Pro 14" M1 Pro 2021',
+    deviceCondition: 'Battery Service Recommended (74% health, 810 cycles)',
+    issueDescription: 'Battery drains in under 2 hours and trackpad feels stiff.',
+    estimatedQuote: 110000,
+    status: 'pending',
+    stage: 'received',
+    createdAt: '2026-09-21 08:20',
+    serviceMethod: 'doorstep',
+    notes: 'Awaiting customer formal confirmation of OEM battery replacement quote.',
+  },
+];
+
+

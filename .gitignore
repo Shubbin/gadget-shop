@@ -18,6 +18,7 @@ server/tests/
 # production
 /build
 server/dist/
+dist/
 
 # debug
 npm-debug.log*
